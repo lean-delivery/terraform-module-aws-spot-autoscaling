@@ -1,5 +1,5 @@
 module "ASGROUP" {
-  source = "tf-module-aws-spot-autoscaling/"
+  source = "../"
   name   = "service"
 
   # Launch configuration

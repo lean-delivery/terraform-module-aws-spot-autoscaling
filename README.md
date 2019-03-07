@@ -213,13 +213,17 @@ module "ASGROUP" {
 
 
 ## Terraform versions
-Terraform v0.11.11
+
+Terraform version 0.11.11 or newer is required for this module to work.
 
 ## Contributing
 
+Thank you for your interest in contributing! Please refer to [CONTRIBUTING.md](https://github.com/lean-delivery/tf-module-aws-spot-autoscaling/blob/master/CONTRIBUTING.md) for guidance.
 
 ## License
-Apache
+
+Apache2.0 Licensed. See [LICENSE](https://github.com/lean-delivery/tf-module-aws-spot-autoscaling/tree/master/LICENSE) for full details.
 
 ## Authors
-Lean Delivery Team team@lean-delivery.com
+
+Lean Delivery Team <team@lean-delivery.com>
