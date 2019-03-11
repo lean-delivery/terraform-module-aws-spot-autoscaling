@@ -61,7 +61,7 @@ module "asg" {
 }
 
 module "AS_Policys" {
-  source                     = "AS_policys/"
+  source                     = "github.com/lean-delivery/tf-module-aws-scaling-policy"
   autoscaling_group_name     = "${module.asg.this_autoscaling_group_name}"
   policy_name                = "${var.project}-${var.environment}"
   SimpleScaling_policys      = "${var.SimpleScaling_policys}"
