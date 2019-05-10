@@ -6,16 +6,16 @@ Creating autoscaling group on spots (or on standart instances) and add autoscali
 
 ### Includes modules
  * terraform-aws-modules/autoscaling/aws
- * AS_policys
+ * github.com/lean-delivery/tf-module-aws-scaling-policy/
 
 Automatically uses spot-instances if you set spot_price. Set param spot_price = "" to use standart instances
-Module uses [terraform-aws-autoscaling](https://github.com/terraform-aws-modules/terraform-aws-autoscaling) from [Terraform AWS modules](https://github.com/terraform-aws-modules), and adds aws_autoscaling_policy for scaling ASG.
+Module uses [terraform-aws-autoscaling](https://github.com/terraform-aws-modules/terraform-aws-autoscaling) from [Terraform AWS modules](https://github.com/terraform-aws-modules), and adds [aws_autoscaling_policy](https://github.com/lean-delivery/tf-module-aws-scaling-policy) for scaling ASG.
 
 ## Usage
 
 ```hcl
 module "ASGROUP" {
-  source = "tf-module-aws-spot-autoscaling/"
+  source = "github.com/lean-delivery/tf-module-aws-spot-autoscaling"
 
   name = "service"
 
