@@ -116,7 +116,7 @@ go version go1.12 darwin/amd64
 
 ## Contributing
 
-Thank you for your interest in contributing! Please refer to [CONTRIBUTING.md](https://github.com/lean-delivery/tf-module-aws-spot-autoscaling/CONTRIBUTING.md) for guidance.
+Thank you for your interest in contributing! Please refer to [CONTRIBUTING.md](https://github.com/lean-delivery/tf-module-aws-spot-autoscaling/blob/master/CONTRIBUTING.md) for guidance.
 
 ## License
 
