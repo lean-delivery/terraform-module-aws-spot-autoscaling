@@ -31,7 +31,7 @@ go test
 
 ## Run Time
 
-320s - 380s
+320s - 480s
 
 
 ## Require Inputs
