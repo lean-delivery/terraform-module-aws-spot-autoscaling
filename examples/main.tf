@@ -1,95 +1,65 @@
-module "ASGROUP" {
-  source = "../"
-  name   = "service"
+provider "aws" {
+  region = "${var.region}"
+}
 
-  # Launch configuration
-  lc_name = "example-lc"
+data "aws_caller_identity" "current" {}
 
-  instance_type = "t2.micro"
-  image_id      = "ami-01e08d22b9439c15a"
-
-  ebs_block_device = [
-    {
-      device_name           = "/dev/xvdz"
-      volume_type           = "gp2"
-      volume_size           = "50"
-      delete_on_termination = true
-    },
-  ]
-
-  root_block_device = [
-    {
-      volume_size = "50"
-      volume_type = "gp2"
-    },
-  ]
-
-  # Auto scaling group
-  asg_name                  = "example-asg"
-  vpc_zone_identifier       = ["subnet-8d79a2eb", "subnet-938b23db", "subnet-ecfc19b6"]
-  health_check_type         = "EC2"
-  min_size                  = 0
-  max_size                  = 1
-  desired_capacity          = 1
-  wait_for_capacity_timeout = 0
-  spot_price                = "0.1"
-
-  tags = [
-    {
-      key                 = "Environment"
-      value               = "dev"
-      propagate_at_launch = true
-    },
-    {
-      key                 = "Project"
-      value               = "megasecret"
-      propagate_at_launch = true
-    },
-  ]
-
-  tags_as_map = {
-    extra_tag1 = "extra_value1"
-    extra_tag2 = "extra_value2"
-  }
-
-  SimpleAlarmScaling_policys = [
-    {
-      estimated_instance_warmup = ""
-      adjustment_type           = "ChangeInCapacity"
-      policy_type               = "SimpleScaling"
-      cooldown                  = "300"
-      scaling_adjustment        = "0"
-      alarm_name                = "alarm"
-      alarm_comparison_operator = "GreaterThanOrEqualToThreshold"
-      alarm_evaluation_periods  = "2"
-      alarm_metric_name         = "CPUUtilization"
-      alarm_period              = "120"
-      alarm_threshold           = "80"
-      alarm_description         = "This metric monitors ec2 cpu utilization"
-    },
-    {
-      estimated_instance_warmup = ""
-      adjustment_type           = "ExactCapacity"
-      policy_type               = "SimpleScaling"
-      cooldown                  = "250"
-      scaling_adjustment        = "0"
-      alarm_name                = "alarm"
-      alarm_comparison_operator = "GreaterThanOrEqualToThreshold"
-      alarm_evaluation_periods  = "2"
-      alarm_metric_name         = "CPUUtilization"
-      alarm_period              = "180"
-      alarm_threshold           = "90"
-      alarm_description         = "This metric monitors ec2 cpu utilization"
-    },
-  ]
-
-  SimpleScaling_policys = [
-    {
-      estimated_instance_warmup = ""
-      adjustment_type           = "ChangeInCapacity"
-      policy_type               = "SimpleScaling"
-      cooldown                  = "300"
-      scaling_adjustment        = "0"
-    },
-  ]
+module "example_module" {
+  project                                        = "${var.project}"
+  environment                                    = "${var.environment}"
+  asg_name                                       = "${var.asg_name}"
+  associate_public_ip_address                    = "${var.associate_public_ip_address}"
+  create_asg                                     = "${var.create_asg}"
+  create_asg_with_initial_lifecycle_hook         = "${var.create_asg_with_initial_lifecycle_hook}"
+  create_lc                                      = "${var.create_lc}"
+  default_cooldown                               = "${var.default_cooldown}"
+  desired_capacity                               = "${var.desired_capacity}"
+  ebs_block_device                               = "${var.ebs_block_device}"
+  ebs_optimized                                  = "${var.ebs_optimized}"
+  enable_monitoring                              = "${var.enable_monitoring}"
+  enabled_metrics                                = "${var.enabled_metrics}"
+  ephemeral_block_device                         = "${var.ephemeral_block_device}"
+  force_delete                                   = "${var.force_delete}"
+  health_check_grace_period                      = "${var.health_check_grace_period}"
+  health_check_type                              = "${var.health_check_type}"
+  iam_instance_profile                           = "${var.iam_instance_profile}"
+  image_id                                       = "${var.image_id}"
+  initial_lifecycle_hook_default_result          = "${var.initial_lifecycle_hook_default_result}"
+  initial_lifecycle_hook_heartbeat_timeout       = "${var.initial_lifecycle_hook_heartbeat_timeout}"
+  initial_lifecycle_hook_lifecycle_transition    = "${var.initial_lifecycle_hook_lifecycle_transition}"
+  initial_lifecycle_hook_name                    = "${var.initial_lifecycle_hook_name}"
+  initial_lifecycle_hook_notification_metadata   = "${var.initial_lifecycle_hook_notification_metadata}"
+  initial_lifecycle_hook_notification_target_arn = "${var.initial_lifecycle_hook_notification_target_arn}"
+  initial_lifecycle_hook_role_arn                = "${var.initial_lifecycle_hook_role_arn}"
+  instance_type                                  = "${var.instance_type}"
+  key_name                                       = "${var.key_name}"
+  launch_configuration                           = "${var.launch_configuration}"
+  lc_name                                        = "${var.lc_name}"
+  load_balancers                                 = "${var.load_balancers}"
+  max_size                                       = "${var.max_size}"
+  metrics_granularity                            = "${var.metrics_granularity}"
+  min_elb_capacity                               = "${var.min_elb_capacity}"
+  min_size                                       = "${var.min_size}"
+  name                                           = "${var.name}"
+  placement_group                                = "${var.placement_group}"
+  placement_tenancy                              = "${var.placement_tenancy}"
+  protect_from_scale_in                          = "${var.protect_from_scale_in}"
+  recreate_asg_when_lc_changes                   = "${var.recreate_asg_when_lc_changes}"
+  root_block_device                              = "${var.root_block_device}"
+  security_groups                                = "${var.security_groups}"
+  spot_price                                     = "${var.spot_price}"
+  suspended_processes                            = "${var.suspended_processes}"
+  tags                                           = "${var.tags}"
+  tags_as_map                                    = "${var.tags_as_map}"
+  target_group_arns                              = "${var.target_group_arns}"
+  termination_policies                           = "${var.termination_policies}"
+  user_data                                      = "${var.user_data}"
+  vpc_zone_identifier                            = "${list(aws_subnet.test_subnet.id)}"
+  wait_for_capacity_timeout                      = "${var.wait_for_capacity_timeout}"
+  wait_for_elb_capacity                          = "${var.wait_for_elb_capacity}"
+  SimpleScaling_policys                          = "${var.SimpleScaling_policys}"
+  SimpleAlarmScaling_policys                     = "${var.SimpleAlarmScaling_policys}"
+  StepScaling_policys                            = "${var.StepScaling_policys}"
+  TargetTracking_policys                         = "${var.TargetTracking_policys}"
+  source                                         = "../"
 }
